@@ -14,11 +14,11 @@ public:
     }
 };
 
-// Inserting New Node At Beginning
+// Inserting new node at beginning
 void insertAtBeginning(Node *&head, Node *&tail, int val)
 {
     Node *newNode = new Node(val);
-    // Linked List is Empty
+    // Linked list is empty
     if (head == NULL)
     {
         head = newNode;
@@ -26,12 +26,12 @@ void insertAtBeginning(Node *&head, Node *&tail, int val)
         return;
     }
 
-    // Linked List is Non-empty
+    // Linked list is non-empty
     newNode->next = head;
     head = newNode;
 }
 
-// Traverse & Print the Linked List
+// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -42,7 +42,7 @@ void print(Node *head)
     }
 }
 
-// Main Function
+// Main function
 int main()
 {
     Node *head = NULL;
