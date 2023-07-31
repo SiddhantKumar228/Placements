@@ -14,18 +14,16 @@ public:
     }
 };
 
-// Inserting new node at end
+// Inserting node at end
 void insertAtEnd(Node *&head, Node *&tail, int val)
 {
     Node *newNode = new Node(val);
-    // Linked list is empty
     if (head == NULL)
     {
         head = newNode;
         tail = newNode;
         return;
     }
-    // Linked list is non-empty
     tail->next = newNode;
     tail = newNode;
 }
@@ -47,11 +45,13 @@ int main()
     Node *head = NULL;
     Node *tail = NULL;
 
-    insertAtEnd(head, tail, 45);
+    insertAtEnd(head, tail, 12);
+    insertAtEnd(head, tail, 23);
+    insertAtEnd(head, tail, 34);
+    insertAtEnd(head, tail, 49);
     insertAtEnd(head, tail, 67);
-    insertAtEnd(head, tail, 19);
+
     print(head);
-    cout << "\n";
-    cout << "head = " << head->data << "\n";
-    cout << "tail = " << tail->data;
+    cout << "\nhead = " << head->data;
+    cout << "\ntail = " << tail->data;
 }

@@ -67,6 +67,11 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
     }
 }
 
+// Reversing the list
+void reverse(Node *&head, Node *&tail)
+{
+}
+
 // Print linked list
 void print(Node *head)
 {
@@ -90,11 +95,13 @@ int main()
     insertAtPos(head, tail, 4, 48);
     insertAtPos(head, tail, 5, 79);
 
-    insertAtPos(head, tail, 1, 4);
-    insertAtPos(head, tail, 3, 20);
-    insertAtPos(head, tail, 8, 100);
-
+    cout << "\nOriginal List: ";
     print(head);
+
+    reverse(head, tail);
+    cout << "\nReverse List: ";
+    print(head);
+
     cout << "\nhead = " << head->data;
     cout << "\ntail = " << tail->data;
 }

@@ -14,8 +14,8 @@ public:
     }
 };
 
-// Insert new nodes at beginning
-void insertAtbeginning(Node *&head, Node *&tail, int val)
+// Inserting node at beginning
+void insertAtBeginning(Node *&head, Node *&tail, int val)
 {
     Node *newNode = new Node(val);
     if (head == NULL)
@@ -28,24 +28,21 @@ void insertAtbeginning(Node *&head, Node *&tail, int val)
     head = newNode;
 }
 
-// Delete nodes from beginning
-void deleteFromBeginning(Node *&head, Node *&tail)
+// Deleting node from beginning
+void delFromBeginning(Node *&head, Node *&tail)
 {
-    // List is empty
+    Node *temp = head;
     if (head == NULL)
     {
         cout << "Underflow";
         return;
     }
-
-    // List is non-empty
-    Node *temp = head;
     head = head->next;
     temp->next = NULL;
     delete temp;
 }
 
-// Print list
+// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -62,21 +59,20 @@ int main()
     Node *head = NULL;
     Node *tail = NULL;
 
-    insertAtbeginning(head, tail, 50);
-    insertAtbeginning(head, tail, 40);
-    insertAtbeginning(head, tail, 30);
-    insertAtbeginning(head, tail, 20);
-    insertAtbeginning(head, tail, 10);
-    cout << "Original List = ";
-    print(head);
-    cout << "\n";
+    insertAtBeginning(head, tail, 67);
+    insertAtBeginning(head, tail, 49);
+    insertAtBeginning(head, tail, 38);
+    insertAtBeginning(head, tail, 25);
+    insertAtBeginning(head, tail, 12);
 
-    deleteFromBeginning(head, tail);
-    deleteFromBeginning(head, tail);
-    cout << "List after deletion = ";
+    cout << "\nOriginal List: ";
     print(head);
 
-    cout << "\n";
-    cout << "head = " << head->data << "\n";
-    cout << "tail = " << tail->data;
+    delFromBeginning(head, tail);
+    delFromBeginning(head, tail);
+    cout << "\nList After Deletion: ";
+    print(head);
+
+    cout << "\nhead = " << head->data;
+    cout << "\ntail = " << tail->data;
 }
