@@ -70,6 +70,22 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
 // Reversing the list
 void reverse(Node *&head, Node *&tail)
 {
+    if (head == NULL || head->next == NULL)
+    {
+        return;
+    }
+    Node *prev = NULL;
+    Node *curr = head;
+    Node *next = NULL;
+    while (curr != NULL)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    tail = head;
+    head = prev;
 }
 
 // Print linked list
