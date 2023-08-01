@@ -1,0 +1,2 @@
+
+    Node *next = NULL;
