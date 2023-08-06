@@ -6,7 +6,6 @@ class Node
 public:
     int data;
     Node *next;
-    // Constructor
     Node(int val)
     {
         this->data = val;
@@ -14,11 +13,9 @@ public:
     }
 };
 
-// Inserting node at position
 void insertAtPos(Node *&head, Node *&tail, int pos, int val)
 {
     Node *newNode = new Node(val);
-
     if (head == NULL)
     {
         head = newNode;
@@ -26,7 +23,6 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
         return;
     }
 
-    // Count number of nodes
     int count = 1;
     Node *temp = head;
     while (temp->next != NULL)
@@ -35,27 +31,22 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
         temp = temp->next;
     }
 
-    // Position is first
     if (pos == 1)
     {
         newNode->next = head;
         head = newNode;
     }
 
-    // Position is last
     else if (pos == count + 1)
     {
         tail->next = newNode;
         tail = newNode;
     }
-
-    // Position is mid
     else
     {
-        count = 1;
-        temp = head;
         Node *prev = NULL;
         Node *curr = head;
+        count = 1;
         while (count < pos)
         {
             prev = curr;
@@ -67,7 +58,6 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
     }
 }
 
-// Deleting node from position
 void delFromPos(Node *&head, Node *&tail, int pos)
 {
     if (head == NULL)
@@ -76,57 +66,53 @@ void delFromPos(Node *&head, Node *&tail, int pos)
         return;
     }
 
-    // Count number of nodes
     int count = 1;
-    Node *temp = head;
-    while (temp != tail)
+    Node *temp1 = head;
+    while (temp1->next != NULL)
     {
         count++;
-        temp = temp->next;
+        temp1 = temp1->next;
     }
 
-    // Position is first
     if (pos == 1)
     {
-        temp = head;
+        Node *temp = head;
         head = head->next;
+        temp->next = NULL;
         delete temp;
     }
 
-    // Position is last
     else if (pos == count)
     {
-        temp = head;
-        while (temp->next != tail)
+        temp1 = head;
+        while (temp1->next != tail)
         {
-            temp = temp->next;
+            temp1 = temp1->next;
         }
-        temp->next = NULL;
+        temp1->next = NULL;
         delete tail;
-        tail = temp;
+        tail = temp1;
     }
-
-    // Position is mid
     else
     {
-        count = 1;
         Node *prev = NULL;
         Node *curr = head;
-        Node *next = head->next;
+        Node *next = NULL;
+        count = 1;
         while (count < pos)
         {
+            next = curr->next;
             prev = curr;
             curr = next;
-            next = next->next;
             count++;
         }
+        next = curr->next;
         prev->next = next;
         curr->next = NULL;
         delete curr;
     }
 }
 
-// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -137,35 +123,30 @@ void print(Node *head)
     }
 }
 
-// Main function
 int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
 
-    insertAtPos(head, tail, 1, 12);
-    insertAtPos(head, tail, 2, 25);
-    insertAtPos(head, tail, 3, 36);
-    insertAtPos(head, tail, 4, 48);
-    insertAtPos(head, tail, 5, 79);
-    insertAtPos(head, tail, 6, 87);
-    insertAtPos(head, tail, 7, 98);
-
-    cout << "\nOriginal List: ";
+    insertAtPos(head, tail, 1, 11);
+    insertAtPos(head, tail, 2, 22);
+    insertAtPos(head, tail, 3, 33);
+    insertAtPos(head, tail, 4, 44);
+    insertAtPos(head, tail, 5, 55);
+    insertAtPos(head, tail, 6, 66);
+    insertAtPos(head, tail, 7, 77);
+    insertAtPos(head, tail, 8, 88);
     print(head);
-
+    cout << "\n";
     delFromPos(head, tail, 1);
-    cout << "\nList After Deletion: ";
     print(head);
-
-    delFromPos(head, tail, 6);
-    cout << "\nList After Deletion: ";
+    cout << "\n";
+    delFromPos(head, tail, 7);
     print(head);
-
-    delFromPos(head, tail, 3);
-    cout << "\nList After Deletion: ";
+    cout << "\n";
+    delFromPos(head, tail, 4);
     print(head);
-
-    cout << "\nhead = " << head->data;
-    cout << "\ntail = " << tail->data;
+    cout << "\n";
+    cout << "\nHead = " << head->data;
+    cout << "\nTail = " << tail->data;
 }

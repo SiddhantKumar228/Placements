@@ -13,7 +13,7 @@ public:
     }
 };
 
-void insertAtBeg(Node *&head, Node *&tail, int val)
+void insert(Node *&head, Node *&tail, int val)
 {
     Node *newNode = new Node(val);
     if (head == NULL)
@@ -22,31 +22,33 @@ void insertAtBeg(Node *&head, Node *&tail, int val)
         tail = newNode;
         return;
     }
-    newNode->next = head;
-    head = newNode;
+    tail->next = newNode;
+    tail = newNode;
+    tail->next = head;
 }
 
-void print(Node *head)
+void print(Node *head, Node *tail)
 {
     Node *temp = head;
-    while (temp != NULL)
+    while (temp != tail)
     {
         cout << temp->data << " ";
         temp = temp->next;
     }
+    cout << temp->data;
 }
 
 int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
+    insert(head, tail, 1);
+    insert(head, tail, 3);
+    insert(head, tail, 5);
+    insert(head, tail, 7);
+    print(head, tail);
 
-    insertAtBeg(head, tail, 5);
-    insertAtBeg(head, tail, 4);
-    insertAtBeg(head, tail, 3);
-    insertAtBeg(head, tail, 2);
-    insertAtBeg(head, tail, 1);
-    print(head);
     cout << "\nHead = " << head->data;
     cout << "\nTail = " << tail->data;
+    cout << "\nTail Next = " << tail->next->data;
 }

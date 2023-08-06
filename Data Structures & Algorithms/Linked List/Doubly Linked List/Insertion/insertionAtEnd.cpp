@@ -7,7 +7,6 @@ public:
     int data;
     Node *prev;
     Node *next;
-    // Constructor
     Node(int val)
     {
         this->prev = NULL;
@@ -16,7 +15,6 @@ public:
     }
 };
 
-// Inserting node at end
 void insertAtEnd(Node *&head, Node *&tail, int val)
 {
     Node *newNode = new Node(val);
@@ -26,12 +24,11 @@ void insertAtEnd(Node *&head, Node *&tail, int val)
         tail = newNode;
         return;
     }
-    newNode->prev = tail;
     tail->next = newNode;
+    newNode->prev = tail;
     tail = newNode;
 }
 
-// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -42,17 +39,16 @@ void print(Node *head)
     }
 }
 
-// Main function
 int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
 
-    insertAtEnd(head, tail, 4);
-    insertAtEnd(head, tail, 15);
-    insertAtEnd(head, tail, 27);
-    insertAtEnd(head, tail, 37);
-    insertAtEnd(head, tail, 42);
+    insertAtEnd(head, tail, 33);
+    insertAtEnd(head, tail, 11);
+    insertAtEnd(head, tail, 55);
+    insertAtEnd(head, tail, 22);
+    insertAtEnd(head, tail, 44);
     print(head);
     cout << "\nHead = " << head->data;
     cout << "\nTail = " << tail->data;

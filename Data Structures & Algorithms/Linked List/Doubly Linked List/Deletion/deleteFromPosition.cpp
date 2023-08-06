@@ -5,9 +5,8 @@ class Node
 {
 public:
     int data;
-    Node *next;
     Node *prev;
-    // Constructor
+    Node *next;
     Node(int val)
     {
         this->prev = NULL;
@@ -16,20 +15,9 @@ public:
     }
 };
 
-// Inserting node at Position
 void insertAtPos(Node *&head, Node *&tail, int pos, int val)
 {
     Node *newNode = new Node(val);
-
-    // Count the number of nodes
-    Node *temp = head;
-    int count = 1;
-    while (temp != NULL)
-    {
-        count++;
-        temp = temp->next;
-    }
-
     if (head == NULL)
     {
         head = newNode;
@@ -37,70 +25,66 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
         return;
     }
 
-    // Position is first
+    Node *temp = head;
+    int count = 1;
+    while (temp->next != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+
     if (pos == 1)
     {
         newNode->next = head;
         head->prev = newNode;
         head = newNode;
     }
-
-    // Position is last
-    else if (pos == count)
+    else if (pos == count + 1)
     {
         tail->next = newNode;
         newNode->prev = tail;
         tail = newNode;
     }
-
-    // Position is mid
     else
     {
+        count = 1;
         Node *prev = NULL;
         Node *curr = head;
-        count = 1;
         while (count < pos)
         {
             prev = curr;
             curr = curr->next;
             count++;
         }
-        newNode->prev = prev;
-        prev->next = newNode;
         newNode->next = curr;
+        newNode->prev = prev;
         curr->prev = newNode;
+        prev->next = newNode;
     }
 }
 
-// Deleting node from position
-void delFromPosition(Node *&head, Node *&tail, int pos)
+void delFromPos(Node *&head, Node *&tail, int pos)
 {
     if (head == NULL)
     {
         cout << "Underflow";
         return;
     }
-
-    // Count the number of nodes
     Node *temp = head;
     int count = 1;
-    while (temp != tail)
+    while (temp->next != NULL)
     {
         count++;
         temp = temp->next;
     }
-
-    // Position is first
     if (pos == 1)
     {
         temp = head;
         head = head->next;
-        temp->next = NULL;
         head->prev = NULL;
+        temp->next = NULL;
         delete temp;
     }
-
-    // Position is last
     else if (pos == count)
     {
         temp = tail;
@@ -109,30 +93,25 @@ void delFromPosition(Node *&head, Node *&tail, int pos)
         temp->prev = NULL;
         delete temp;
     }
-
-    // Position is mid
     else
     {
+        count = 1;
         Node *prev = NULL;
         Node *curr = head;
-        Node *next = curr->next;
-        count = 1;
         while (count < pos)
         {
             prev = curr;
-            curr = next;
-            next = next->next;
+            curr = curr->next;
             count++;
         }
-        prev->next = next;
-        next->prev = prev;
+        prev->next = curr->next;
+        curr->next->prev = prev;
         curr->next = NULL;
         curr->prev = NULL;
         delete curr;
     }
 }
 
-// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -143,34 +122,29 @@ void print(Node *head)
     }
 }
 
-// Main function
 int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
-
-    insertAtPos(head, tail, 1, 23);
-    insertAtPos(head, tail, 2, 35);
-    insertAtPos(head, tail, 3, 47);
-    insertAtPos(head, tail, 4, 67);
-    insertAtPos(head, tail, 5, 89);
-    insertAtPos(head, tail, 6, 98);
-    insertAtPos(head, tail, 7, 100);
-    cout << "\nOriginal List: ";
+    insertAtPos(head, tail, 1, 11);
+    insertAtPos(head, tail, 2, 22);
+    insertAtPos(head, tail, 3, 33);
+    insertAtPos(head, tail, 4, 44);
+    insertAtPos(head, tail, 5, 55);
+    insertAtPos(head, tail, 6, 66);
+    insertAtPos(head, tail, 7, 77);
     print(head);
-
-    delFromPosition(head, tail, 1);
-    cout << "\nList After Deletion: ";
+    cout << "\nHead = " << head->data;
+    cout << "\nTail = " << tail->data;
+    cout << "\n\n";
+    delFromPos(head, tail, 1);
     print(head);
-
-    delFromPosition(head, tail, 6);
-    cout << "\nList After Deletion: ";
+    cout << "\n";
+    delFromPos(head, tail, 6);
     print(head);
-
-    delFromPosition(head, tail, 3);
-    cout << "\nList After Deletion: ";
+    cout << "\n";
+    delFromPos(head, tail, 3);
     print(head);
-
     cout << "\nHead = " << head->data;
     cout << "\nTail = " << tail->data;
 }

@@ -6,7 +6,6 @@ class Node
 public:
     int data;
     Node *next;
-    // Constructor
     Node(int val)
     {
         this->data = val;
@@ -14,8 +13,7 @@ public:
     }
 };
 
-// Inserting node at beginning
-void insertAtBeginning(Node *&head, Node *&tail, int val)
+void insertAtBeg(Node *&head, Node *&tail, int val)
 {
     Node *newNode = new Node(val);
     if (head == NULL)
@@ -28,21 +26,19 @@ void insertAtBeginning(Node *&head, Node *&tail, int val)
     head = newNode;
 }
 
-// Deleting node from beginning
-void delFromBeginning(Node *&head, Node *&tail)
+void delFromBeg(Node *&head, Node *&tail)
 {
-    Node *temp = head;
     if (head == NULL)
     {
-        cout << "Underflow";
+        cout << "UnderFlow";
         return;
     }
+    Node *temp = head;
     head = head->next;
     temp->next = NULL;
     delete temp;
 }
 
-// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -53,26 +49,24 @@ void print(Node *head)
     }
 }
 
-// Main function
 int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
 
-    insertAtBeginning(head, tail, 67);
-    insertAtBeginning(head, tail, 49);
-    insertAtBeginning(head, tail, 38);
-    insertAtBeginning(head, tail, 25);
-    insertAtBeginning(head, tail, 12);
-
-    cout << "\nOriginal List: ";
+    insertAtBeg(head, tail, 5);
+    insertAtBeg(head, tail, 4);
+    insertAtBeg(head, tail, 3);
+    insertAtBeg(head, tail, 2);
+    insertAtBeg(head, tail, 1);
     print(head);
-
-    delFromBeginning(head, tail);
-    delFromBeginning(head, tail);
-    cout << "\nList After Deletion: ";
+    cout << "\n";
+    delFromBeg(head, tail);
     print(head);
-
-    cout << "\nhead = " << head->data;
-    cout << "\ntail = " << tail->data;
+    cout << "\n";
+    delFromBeg(head, tail);
+    print(head);
+    cout << "\n";
+    cout << "\nHead = " << head->data;
+    cout << "\nTail = " << tail->data;
 }

@@ -5,9 +5,8 @@ class Node
 {
 public:
     int data;
-    Node *next;
     Node *prev;
-    // Constructor
+    Node *next;
     Node(int val)
     {
         this->prev = NULL;
@@ -16,8 +15,7 @@ public:
     }
 };
 
-// Inserting node at beginning
-void insertAtBeginning(Node *&head, Node *&tail, int val)
+void insertAtBeg(Node *&head, Node *&tail, int val)
 {
     Node *newNode = new Node(val);
     if (head == NULL)
@@ -31,7 +29,6 @@ void insertAtBeginning(Node *&head, Node *&tail, int val)
     head = newNode;
 }
 
-// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -42,19 +39,17 @@ void print(Node *head)
     }
 }
 
-// Main function
 int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
 
-    insertAtBeginning(head, tail, 47);
-    insertAtBeginning(head, tail, 35);
-    insertAtBeginning(head, tail, 23);
-    insertAtBeginning(head, tail, 12);
-    insertAtBeginning(head, tail, 4);
+    insertAtBeg(head, tail, 5);
+    insertAtBeg(head, tail, 4);
+    insertAtBeg(head, tail, 3);
+    insertAtBeg(head, tail, 2);
+    insertAtBeg(head, tail, 1);
     print(head);
-
     cout << "\nHead = " << head->data;
     cout << "\nTail = " << tail->data;
 }

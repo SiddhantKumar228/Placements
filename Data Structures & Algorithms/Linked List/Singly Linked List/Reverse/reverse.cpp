@@ -6,7 +6,6 @@ class Node
 public:
     int data;
     Node *next;
-    // Constructor
     Node(int val)
     {
         this->data = val;
@@ -14,11 +13,9 @@ public:
     }
 };
 
-// Insert node at position
 void insertAtPos(Node *&head, Node *&tail, int pos, int val)
 {
     Node *newNode = new Node(val);
-
     if (head == NULL)
     {
         head = newNode;
@@ -26,7 +23,6 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
         return;
     }
 
-    // Count number of nodes
     int count = 1;
     Node *temp = head;
     while (temp->next != NULL)
@@ -35,27 +31,22 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
         temp = temp->next;
     }
 
-    // Position is first
     if (pos == 1)
     {
         newNode->next = head;
         head = newNode;
     }
 
-    // Position is last
     else if (pos == count + 1)
     {
         tail->next = newNode;
         tail = newNode;
     }
-
-    // Position is mid
     else
     {
-        count = 1;
-        temp = head;
         Node *prev = NULL;
         Node *curr = head;
+        count = 1;
         while (count < pos)
         {
             prev = curr;
@@ -67,7 +58,6 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
     }
 }
 
-// Reversing the list
 void reverse(Node *&head, Node *&tail)
 {
     if (head == NULL || head->next == NULL)
@@ -76,19 +66,19 @@ void reverse(Node *&head, Node *&tail)
     }
     Node *prev = NULL;
     Node *curr = head;
-    Node *next = NULL;
-    while (curr != NULL)
+    Node *next = curr->next;
+    while (next != NULL)
     {
-        next = curr->next;
         curr->next = prev;
         prev = curr;
         curr = next;
+        next = curr->next;
     }
+    curr->next = prev;
     tail = head;
-    head = prev;
+    head = curr;
 }
 
-// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -99,25 +89,26 @@ void print(Node *head)
     }
 }
 
-// Main function
 int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
 
-    insertAtPos(head, tail, 1, 12);
-    insertAtPos(head, tail, 2, 25);
-    insertAtPos(head, tail, 3, 36);
-    insertAtPos(head, tail, 4, 48);
-    insertAtPos(head, tail, 5, 79);
-
-    cout << "\nOriginal List: ";
+    insertAtPos(head, tail, 1, 11);
+    insertAtPos(head, tail, 2, 22);
+    insertAtPos(head, tail, 3, 33);
+    insertAtPos(head, tail, 4, 44);
+    insertAtPos(head, tail, 5, 55);
+    insertAtPos(head, tail, 6, 66);
+    insertAtPos(head, tail, 7, 77);
+    insertAtPos(head, tail, 8, 88);
     print(head);
-
+    cout << "\nHead = " << head->data;
+    cout << "\nTail = " << tail->data;
+    cout << "\n";
+    cout << "\n";
     reverse(head, tail);
-    cout << "\nReverse List: ";
     print(head);
-
-    cout << "\nhead = " << head->data;
-    cout << "\ntail = " << tail->data;
+    cout << "\nHead = " << head->data;
+    cout << "\nTail = " << tail->data;
 }

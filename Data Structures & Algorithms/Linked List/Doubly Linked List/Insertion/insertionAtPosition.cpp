@@ -5,9 +5,8 @@ class Node
 {
 public:
     int data;
-    Node *next;
     Node *prev;
-    // Constructor
+    Node *next;
     Node(int val)
     {
         this->prev = NULL;
@@ -16,20 +15,9 @@ public:
     }
 };
 
-// Inserting node at Position
 void insertAtPos(Node *&head, Node *&tail, int pos, int val)
 {
     Node *newNode = new Node(val);
-
-    // Count the number of nodes
-    Node *temp = head;
-    int count = 1;
-    while (temp != NULL)
-    {
-        count++;
-        temp = temp->next;
-    }
-
     if (head == NULL)
     {
         head = newNode;
@@ -37,42 +25,44 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int val)
         return;
     }
 
-    // Position is first
+    Node *temp = head;
+    int count = 1;
+    while (temp->next != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+
     if (pos == 1)
     {
         newNode->next = head;
         head->prev = newNode;
         head = newNode;
     }
-
-    // Position is last
-    else if (pos == count)
+    else if (pos == count + 1)
     {
         tail->next = newNode;
         newNode->prev = tail;
         tail = newNode;
     }
-
-    // Position is mid
     else
     {
+        count = 1;
         Node *prev = NULL;
         Node *curr = head;
-        count = 1;
         while (count < pos)
         {
             prev = curr;
             curr = curr->next;
             count++;
         }
-        newNode->prev = prev;
-        prev->next = newNode;
         newNode->next = curr;
+        newNode->prev = prev;
         curr->prev = newNode;
+        prev->next = newNode;
     }
 }
 
-// Print linked list
 void print(Node *head)
 {
     Node *temp = head;
@@ -83,21 +73,25 @@ void print(Node *head)
     }
 }
 
-// Main function
 int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
-
-    insertAtPos(head, tail, 1, 23);
-    insertAtPos(head, tail, 2, 35);
-    insertAtPos(head, tail, 3, 47);
-    insertAtPos(head, tail, 4, 67);
-    insertAtPos(head, tail, 5, 89);
-
-    insertAtPos(head, tail, 3, 40);
+    insertAtPos(head, tail, 1, 11);
+    insertAtPos(head, tail, 2, 22);
+    insertAtPos(head, tail, 3, 33);
+    insertAtPos(head, tail, 4, 44);
+    insertAtPos(head, tail, 5, 55);
     print(head);
     cout << "\n";
+    insertAtPos(head, tail, 1, 9);
+    print(head);
+    cout << "\n";
+    insertAtPos(head, tail, 7, 66);
+    print(head);
+    cout << "\n";
+    insertAtPos(head, tail, 3, 15);
+    print(head);
     cout << "\nHead = " << head->data;
     cout << "\nTail = " << tail->data;
 }
